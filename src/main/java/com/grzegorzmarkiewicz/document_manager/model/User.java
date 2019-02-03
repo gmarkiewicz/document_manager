@@ -1,7 +1,6 @@
 package com.grzegorzmarkiewicz.document_manager.model;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity(name = "users")
@@ -14,12 +13,17 @@ public class User {
     private String password;
     private String name;
     private String surname;
+    @Transient
+    private String passwordConfirm;
+
     @OneToMany(mappedBy = "comment")
-    private List<Comment> comments;
+    private Set<Comment> comments;
     @ManyToMany
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "userId"),
             inverseJoinColumns = @JoinColumn(name = "roleId"))
     private Set<Role> roles;
+    @OneToMany
+    private Set<Document> documents;
 
     public User(String username, String password, String name, String surname) {
         this.username = username;
@@ -71,11 +75,11 @@ public class User {
         this.surname = surname;
     }
 
-    public List<Comment> getComments() {
+    public Set<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(List<Comment> comments) {
+    public void setComments(Set<Comment> comments) {
         this.comments = comments;
     }
 
@@ -85,5 +89,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
     }
 }

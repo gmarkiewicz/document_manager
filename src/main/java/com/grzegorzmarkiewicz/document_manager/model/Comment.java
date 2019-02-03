@@ -10,10 +10,10 @@ public class Comment {
     private Long id;
     private String comment;
     @ManyToOne
-    @MapsId
+    @MapsId("userId")
     private User user;
     @ManyToOne
-    @MapsId
+    @MapsId("documentId")
     private Document document;
 
     public Comment(String comment) {

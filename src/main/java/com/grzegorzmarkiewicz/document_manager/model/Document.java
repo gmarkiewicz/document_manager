@@ -9,14 +9,14 @@ import java.util.List;
 public class Document {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long documentId;
     private String name;
     private String description;
     private Timestamp creationDate;
     private Timestamp lastEdited;
     @ManyToOne
-    @MapsId
+    @MapsId("userId")
     private User user;
     @OneToMany(mappedBy = "document")
     private List<Comment> comments;
