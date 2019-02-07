@@ -6,7 +6,7 @@
     <title>Register</title>
 </head>
 <body>
-    <form:form method="post" modelAttribute="user">
+    <form:form method="post" modelAttribute="userForm">
         <div>
             <label>Username:</label>
             <form:input name="username" path="username"></form:input>
@@ -19,6 +19,13 @@
             <form:input name="password" path="password"></form:input>
             <c:if test="${pageContext.request.method=='POST'}">
                 <form:errors path="password"/>
+            </c:if>
+        </div>
+        <div>
+            <label>Confirm password:</label>
+            <form:input name="password" path="passwordConfirm"></form:input>
+            <c:if test="${pageContext.request.method=='POST'}">
+                <form:errors path="passwordConfirm"/>
             </c:if>
         </div>
         <div>

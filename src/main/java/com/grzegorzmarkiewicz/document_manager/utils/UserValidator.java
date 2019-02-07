@@ -8,8 +8,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import javax.validation.Validation;
-
 @Component
 public class UserValidator implements Validator{
     @Autowired
@@ -33,11 +31,21 @@ public class UserValidator implements Validator{
         }
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty");
-        if(user.getPassword().length() <6 || user.getPassword().length() >32){
+        if(user.getPassword().length() < 6 || user.getPassword().length() > 32){
             errors.rejectValue("password", "Size.userForm.password");
         }
         if(!user.getPasswordConfirm().equals(user.getPassword())){
             errors.rejectValue("passwordConfirm", "Diff.userForm.passwordConfirm");
+        }
+
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty");
+        if (user.getName().length() < 2 || user.getName().length() > 20) {
+            errors.rejectValue("name", "Size.userForm.name");
+        }
+
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "surname", "NotEmpty");
+        if(user.getSurname().length() < 4 || user.getSurname().length() > 30){
+            errors.rejectValue("surname", "Size.userForm.surname");
         }
     }
 }

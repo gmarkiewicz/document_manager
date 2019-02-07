@@ -35,7 +35,8 @@ public class DocumentManagerApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        User user = new User("grzegorz", "haslo1", "Grzegorz", "Markiewicz");
+        User user = new User("grzegorz", "$2a$10$pcww8AjnAWKOxSJe85W86eS9Cjku.LQxr0wdpaJ9P.ZKuOt4cC42u",
+                "Grzegorz", "Markiewicz");
         Set<Role> roles = new HashSet<>();
         roles.add(roleRepository.findRoleByName("USER"));
         roles.add(roleRepository.findRoleByName("MODERATOR"));

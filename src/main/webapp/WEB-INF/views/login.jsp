@@ -32,7 +32,7 @@
 <body>
 <div th:if="${param.message != null}" class="alert alert-info" th:text="${param.message[0]}">message</div>
 <div th:if="${param.error != null}" class="alert alert-danger" th:text="${session[SPRING_SECURITY_LAST_EXCEPTION]}">error</div>
-    <form name="f" action="login" method="post" onsubmit="return validate();">
+    <form name="f" action="documentManager" method="post" onsubmit="return validate();">
         <table>
             <tr>
                 <td>Username:</td>

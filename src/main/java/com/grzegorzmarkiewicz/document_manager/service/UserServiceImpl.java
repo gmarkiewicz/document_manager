@@ -1,5 +1,6 @@
 package com.grzegorzmarkiewicz.document_manager.service;
 
+import com.grzegorzmarkiewicz.document_manager.model.Role;
 import com.grzegorzmarkiewicz.document_manager.model.User;
 import com.grzegorzmarkiewicz.document_manager.repository.RoleRepository;
 import com.grzegorzmarkiewicz.document_manager.repository.UserRepository;
@@ -8,9 +9,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Set;
 
 @Service
-public class UserSericeImpl implements UserService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
@@ -22,7 +24,9 @@ public class UserSericeImpl implements UserService {
     @Override
     public void saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRoles(new HashSet<>(roleRepository.findAll()));
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleRepository.findRoleByName("USER"));
+        user.setRoles(roles);
         userRepository.save(user);
     }
 

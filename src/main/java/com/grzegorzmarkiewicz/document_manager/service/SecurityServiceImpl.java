@@ -13,9 +13,9 @@ import java.util.logging.Logger;
 
 @Service
 public class SecurityServiceImpl implements SecuritySerice{
+
     @Autowired
     private AuthenticationManager authenticationManager;
-
     @Autowired
     private UserDetailsService userDetailsService;
 
