@@ -8,16 +8,16 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String comment;
-    @ManyToOne
-    @MapsId("userId")
+    private String content;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
     @ManyToOne
-    @MapsId("documentId")
+    @JoinColumn(name = "document_id")
     private Document document;
 
-    public Comment(String comment) {
-        this.comment = comment;
+    public Comment(String content) {
+        this.content = content;
     }
 
     public Comment() {
@@ -31,12 +31,12 @@ public class Comment {
         this.id = id;
     }
 
-    public String getComment() {
-        return comment;
+    public String getContent() {
+        return content;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public User getUser() {

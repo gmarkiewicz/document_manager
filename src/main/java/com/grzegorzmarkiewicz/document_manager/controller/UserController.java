@@ -5,7 +5,6 @@ import com.grzegorzmarkiewicz.document_manager.service.SecuritySerice;
 import com.grzegorzmarkiewicz.document_manager.service.UserService;
 import com.grzegorzmarkiewicz.document_manager.utils.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -48,10 +47,5 @@ public class UserController {
         return "redirect:/documentManager";
     }
 
-    @RequestMapping(value = "/documentManager", method = RequestMethod.GET)
-    public String documentManager(Model model, Authentication authentication){
-        model.addAttribute("userRole", authentication.getAuthorities());
-        model.addAttribute("username", authentication.getName());
-        return "documentManager";
-    }
+
 }

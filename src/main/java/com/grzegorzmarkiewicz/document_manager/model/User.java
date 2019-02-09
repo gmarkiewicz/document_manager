@@ -10,20 +10,18 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
     private String username;
+    private Boolean enabled;
     private String password;
     private String name;
     private String surname;
     @Transient
     private String passwordConfirm;
 
-    @OneToMany(mappedBy = "comment")
-    private Set<Comment> comments;
     @ManyToMany
-    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "userId"),
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "userId"),
             inverseJoinColumns = @JoinColumn(name = "roleId"))
     private Set<Role> roles;
-    @OneToMany
-    private Set<Document> documents;
 
     public User(String username, String password, String name, String surname) {
         this.username = username;
@@ -39,8 +37,8 @@ public class User {
         return userId;
     }
 
-    public void setId(Long id) {
-        this.userId = id;
+    public void setId(Long userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
@@ -75,14 +73,6 @@ public class User {
         this.surname = surname;
     }
 
-    public Set<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(Set<Comment> comments) {
-        this.comments = comments;
-    }
-
     public Set<Role> getRoles() {
         return roles;
     }
@@ -98,4 +88,21 @@ public class User {
     public void setPasswordConfirm(String passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
     }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
 }

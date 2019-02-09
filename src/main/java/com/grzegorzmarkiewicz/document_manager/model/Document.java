@@ -16,10 +16,8 @@ public class Document {
     private Timestamp creationDate;
     private Timestamp lastEdited;
     @ManyToOne
-    @MapsId("userId")
+    @JoinColumn(name = "user_id")
     private User user;
-    @OneToMany(mappedBy = "document")
-    private List<Comment> comments;
     private Blob pdfFile;
 
     public Document(String name, String description) {
@@ -76,14 +74,6 @@ public class Document {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
     }
 
     public Blob getPdfFile() {
