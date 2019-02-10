@@ -8,6 +8,7 @@
 <body>
     <h1>Document Manager</h1>
     <p>Welcome <sec:authentication property="principal.username"/>!</p>
+    <a href="/addFile.jsp"><button type="submit" value="Add File"></button></a>
     <table>
         <tr>
             <th>Id</th>

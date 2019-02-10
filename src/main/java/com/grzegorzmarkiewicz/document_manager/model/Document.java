@@ -19,7 +19,7 @@ public class Document {
     @JoinColumn(name = "user_id")
     private User user;
     @Lob
-    private Blob pdfFile;
+    private byte[] pdfFile;
     private String fileType;
 
     public Document(String name, String description) {
@@ -78,11 +78,11 @@ public class Document {
         this.user = user;
     }
 
-    public Blob getPdfFile() {
+    public byte[] getPdfFile() {
         return pdfFile;
     }
 
-    public void setPdfFile(Blob pdfFile) {
+    public void setPdfFile(byte[] pdfFile) {
         this.pdfFile = pdfFile;
     }
 

@@ -1,7 +1,7 @@
 package com.grzegorzmarkiewicz.document_manager.controller;
 
 import com.grzegorzmarkiewicz.document_manager.model.User;
-import com.grzegorzmarkiewicz.document_manager.service.SecuritySerice;
+import com.grzegorzmarkiewicz.document_manager.service.SecurityService;
 import com.grzegorzmarkiewicz.document_manager.service.UserService;
 import com.grzegorzmarkiewicz.document_manager.utils.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class UserController {
     @Autowired
     private UserService userService;
     @Autowired
-    private SecuritySerice securitySerice;
+    private SecurityService securitySerice;
     @Autowired
     private UserValidator userValidator;
 

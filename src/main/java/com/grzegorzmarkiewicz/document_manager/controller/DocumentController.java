@@ -1,11 +1,11 @@
 package com.grzegorzmarkiewicz.document_manager.controller;
 
 import com.grzegorzmarkiewicz.document_manager.model.Document;
+import com.grzegorzmarkiewicz.document_manager.model.User;
 import com.grzegorzmarkiewicz.document_manager.repository.DocumentRepository;
-import org.hibernate.Hibernate;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+
+import com.grzegorzmarkiewicz.document_manager.repository.UserRepository;
+import com.grzegorzmarkiewicz.document_manager.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.sql.Blob;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,11 +27,12 @@ import java.util.logging.Logger;
 public class DocumentController {
     private static final Logger LOGGER = Logger.getLogger(DocumentController.class.getName());
 
-    private SessionFactory sessionFactory = new Configuration().buildSessionFactory();
-     
-
     @Autowired
     private DocumentRepository documentRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private SecurityService securityService;
 
     @RequestMapping(value = "/documentManager", method = RequestMethod.GET)
     public String documentManager(Map<String, Object> map){
@@ -48,13 +50,19 @@ public class DocumentController {
         LOGGER.log(Level.INFO, "file name: " + file.getOriginalFilename() + " | file type: " + file.getContentType()
                 + " | file size: " + file.getSize());
         try{
-            Blob blob = Hibernate.getLobCreator(sessionFactory.openSession()).createBlob(file.getInputStream(),
-                    file.getSize());
-            documentForm.setPdfFile(blob);
+            byte[] pdfFile = file.getBytes();
+            documentForm.setPdfFile(pdfFile);
             documentForm.setFileType(file.getContentType());
         }catch(IOException e){
             e.printStackTrace();
         }
+        String username = securityService.findLoggedInUsername();
+        User creator = userRepository.findByUsername(username);
+        documentForm.setUser(creator);
+
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        documentForm.setCreationDate(timestamp);
+        documentForm.setLastEdited(timestamp);
         try{
             documentRepository.save(documentForm);
         }catch(Exception e){
