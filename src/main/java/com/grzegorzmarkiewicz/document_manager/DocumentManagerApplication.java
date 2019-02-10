@@ -49,6 +49,7 @@ public class DocumentManagerApplication implements CommandLineRunner {
         List<Document> documents2 = createDocuments(user2);
         documentRepository.saveAll(documents2);
     }
+
     private User createUser(){
         User user = new User("grzmark","$2a$10$pcww8AjnAWKOxSJe85W86eS9Cjku.LQxr0wdpaJ9P.ZKuOt4cC42u",
                 "name", "surname");
@@ -58,9 +59,8 @@ public class DocumentManagerApplication implements CommandLineRunner {
         user.setRoles(roles);
 
         return user;
-
-
     }
+
     private User createAdmin(){
         User user = new User("grzegorz", "$2a$10$pcww8AjnAWKOxSJe85W86eS9Cjku.LQxr0wdpaJ9P.ZKuOt4cC42u",
                 "Grzegorz", "Markiewicz");

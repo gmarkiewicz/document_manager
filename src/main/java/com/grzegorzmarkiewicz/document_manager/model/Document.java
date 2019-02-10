@@ -18,7 +18,9 @@ public class Document {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+    @Lob
     private Blob pdfFile;
+    private String fileType;
 
     public Document(String name, String description) {
         this.name = name;
@@ -82,5 +84,13 @@ public class Document {
 
     public void setPdfFile(Blob pdfFile) {
         this.pdfFile = pdfFile;
+    }
+
+    public String getFileType() {
+        return fileType;
+    }
+
+    public void setFileType(String fileType) {
+        this.fileType = fileType;
     }
 }

@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Document Manager</h1>
-    <p>Welcome <sec:authentication property="principal.username" var="username"/>!</p>
+    <p>Welcome <sec:authentication property="principal.username"/>!</p>
     <table>
         <tr>
             <th>Id</th>
@@ -28,16 +28,14 @@
                 <td>${document.lastEdited}</td>
                 <td>
                     <sec:authorize access="hasAnyAuthority('MODERATOR', 'ADMIN')">
-                        <button type="submit" value="Edit"></button>
+                        <button type="submit" value="Edit">Edit</button>
                     </sec:authorize>
                     <sec:authorize access="hasAuthority('ADMIN')">
-                        <button type="submit" value="Delete"></button>
+                        <button type="submit" value="Delete">Delete</button>
                     </sec:authorize>
                 </td>
-
                 </tr>
             </c:forEach>
-
     </table>
 </body>
 </html>
